@@ -1,0 +1,75 @@
+<?php
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+use App\controller\authController;
+require_once('../controller/authController.php');
+require_once('../models/auth.php');
+require_once('../config/database.php');
+
+$controller = new authController();
+$page = $_GET['p'] ?? "home";
+
+$paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar'];
+
+if (in_array($page, $paginas_privadas) && !isset($_SESSION['usuario_id'])) {
+    header("Location: index.php?p=login");
+    exit;
+}
+
+switch($page){
+    case 'cadastrar':
+        $controller->criarUser();
+    break;
+    case 'logar':
+        $controller->logar();
+    break;
+    case 'logout':
+        $controller->logout();
+    break;
+}
+
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="stylesheet" href="../public/css/home.css">
+    <link rel="stylesheet" href="../public/css/dashboard.css">
+    <link rel="stylesheet" href="../public/css/eventos.css">
+    <link rel="stylesheet" href="../public/css/gerenciar_eventos.css">
+    <link rel="stylesheet" href="../public/css/institucional.css">
+    <title>PartyPal</title>
+</head>
+<body>
+    <?php if ($page !== 'login'): ?>
+    <header>
+        <nav>
+            <?php require_once('../public/menu.php'); ?>
+        </nav>
+    </header>
+    <?php endif; ?>
+    <main class="<?php echo $page === 'login' ? 'auth-main' : ''; ?>">
+        <?php
+            match($page){
+                "home" => require_once('../view/home.php'),
+                "login" => require_once('../view/login.php'),
+                "logar" => require_once('../view/home.php'),
+                "cadastrar" => require_once('../view/login.php'),
+                "dashboard" => require_once('../view/dashboard.php'),
+                "eventos" => require_once('../view/eventos.php'),
+                'contato' => require_once('../view/contato.php'),
+                'sobre' => require_once('../view/sobre.php'),
+                'meusEventos' => require_once('../view/meus_eventos.php'),
+                'gerenciar' => require_once('../view/gerenciar_categorias.php'),
+                'editar' => require_once('../view/editar_evento.php'),
+                'detalhes' => require_once('../view/detalhes_evento.php'),
+                'criar' => require_once('../view/criar_evento.php'),
+                default => require_once('../view/error404.php')
+            };
+        ?>
+    </main>
+</body>
+</html>

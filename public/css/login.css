@@ -1,0 +1,180 @@
+.auth-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background: #0b0b0b url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1600&auto=format&fit=crop') center/cover;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-section::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(11, 11, 11, 0.9);
+    z-index: -1;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 460px;
+    padding: 20px;
+}
+
+.logo-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    user-select: none;
+}
+
+.logo-center h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.auth-card {
+    background: #141414;
+    padding: 35px 30px;
+    border-radius: 24px;
+    border: 1px solid #242424;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.auth-card h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.auth-section .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.auth-section .form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.auth-section .form-row .form-group {
+    flex: 1;
+}
+
+.auth-section label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #9e9e9e;
+    margin-bottom: 8px;
+}
+
+.auth-section input {
+    background: #191919;
+    border: 1px solid #2d2d2d;
+    color: #ffffff;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14.5px;
+    transition: all 0.25s ease-in-out;
+    outline: none;
+    height: 50px;
+    width: 100%;
+}
+
+.auth-section input:focus {
+    border-color: #e255ff;
+    box-shadow: 0px 0px 10px rgba(226, 85, 255, 0.15);
+    background: #1f1f1f;
+}
+
+.auth-section .input-date {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    cursor: text;
+}
+
+.auth-section .input-date:invalid {
+    color: #888888;
+}
+
+.auth-section .input-date::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e255ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    filter: none; 
+    opacity: 0.8;
+    transition: transform 0.2s;
+}
+
+.auth-section .input-date::-webkit-calendar-picker-indicator:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.auth-btn-primary {
+    background: linear-gradient(90deg, #e255ff, #ff4ff0);
+    color: #ffffff;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Poppins', sans-serif;
+    height: 50px;
+}
+
+.auth-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 20px rgba(226, 85, 255, 0.35);
+    filter: brightness(1.05);
+}
+
+.auth-btn-primary:active {
+    transform: translateY(0);
+}
+
+.auth-section .full-width {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.auth-section .auth-link {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: #a5a5a5;
+}
+
+.auth-section .auth-link a {
+    color: #e255ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.auth-section .auth-link a:hover {
+    color: #ff4ff0;
+    text-decoration: underline;
+}
