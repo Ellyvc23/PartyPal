@@ -30,7 +30,7 @@
                         <h4>Festa Eletrônica Sunset</h4>
                         <p>🕒 24 de Maio às 22:00 | Status: <span class="participation-status">Confirmado</span></p>
                     </div>
-                    <a href="index.php?p=detalhes_evento&id=2" class="participation-link">Acessar Página</a>
+                    <a href="index.php?p=detalhes" class="participation-link">Acessar Página</a>
                 </div>
             </div>
         </div>

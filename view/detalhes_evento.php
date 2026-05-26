@@ -1,58 +1,93 @@
 <section class="event-details-section">
     <div class="event-details-flex">
         <div class="event-details-media">
-            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" alt="Evento">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop" alt="Imagem do Evento">
         </div>
+
         <div class="event-details-info">
             <div>
-                <span class="event-tag">MÚSICA</span>
-                <h1>Show de Rock Ao Vivo</h1>
-                <p class="event-detail-item">📍 <strong>Local:</strong> Rio de Janeiro - RJ</p>
-                <p class="event-detail-item">📅 <strong>Data:</strong> Sex, 31 de Maio às 20:00</p>
-                <p class="event-detail-item">👤 <strong>Organizador:</strong> Nome do Usuário</p>
-                <p class="event-description">Venha curtir a maior noite de rock clássico do ano com bandas locais e convidados especiais!</p>
+                <span class="event-tag">Festas & Shows</span>
+                <h1>Neon Night Party 2026</h1>
+                
+                <div class="event-detail-item">
+                    <span class="meta-icon">📅</span>
+                    <strong>Data e Hora:</strong> 12 de Junho, às 22:00
+                </div>
+                
+                <div class="event-detail-item">
+                    <span class="meta-icon">📍</span>
+                    <strong>Local:</strong> Espaço VIP, Curitiba
+                </div>
+                
+                <div class="event-detail-item">
+                    <span class="meta-icon">👤</span>
+                    <strong>Organizado por:</strong> Pekas Eventos
+                </div>
+                
+                <div class="event-detail-item">
+                    <span class="meta-icon">🏷️</span>
+                    <strong>Capacidade:</strong> 500 pessoas
+                </div>
+
+                <div class="event-description-box">
+                    <h3>Sobre o Evento</h3>
+                    <p class="event-description">A maior festa neon da região está de volta com open bar premium e line-up de DJs internacionais. Venha com roupas brancas ou fluorescentes para aproveitar ao máximo a iluminação ultravioleta, as tintas neon espalhadas pelo espaço e os brindes exclusivos que preparamos para a comunidade PartyPal.</p>
+                </div>
             </div>
+
             <div class="presence-box">
-                <form action="index.php?p=participar" method="POST" class="presence-form">
-                    <input type="hidden" name="csrf_token" value="token_csrf_aqui">
-                    <input type="hidden" name="evento_id" value="1">
-                    <select name="status" class="presence-select">
-                        <option value="Confirmado">Confirmado</option>
-                        <option value="Interessado">Interessado</option>
-                        <option value="Cancelado">Cancelado</option>
+                <form class="presence-form" method="POST" action="">
+                    <select class="presence-select" name="status_presenca">
+                        <option value="confirmado">Confirmado</option>
+                        <option value="interessado">Interessado</option>
+                        <option value="ausente">Não vou</option>
                     </select>
-                    <button type="submit" class="presence-btn">Confirmar Presença</button>
+                    <button type="submit" class="presence-btn">Marcar Presença</button>
                 </form>
             </div>
         </div>
     </div>
 
     <div class="participants-box">
-        <h3>Quem vai participar (Listagem do Criador)</h3>
+        <h3>Confirmados no Rolê</h3>
         <ul class="participants-list">
-            <li class="participant-item">🤘 João Silva (Confirmado)</li>
-            <li class="participant-item">⭐ Maria Souza (Interessado)</li>
+            <li class="participant-item">Ellyson</li>
+            <li class="participant-item">Pekas</li>
+            <li class="participant-item">Pazuch</li>
+            <li class="participant-item">Samuel</li>
+            <li class="participant-item">Rezende</li>
         </ul>
     </div>
 
     <div class="comments-container">
-        <h3>Comentários da Comunidade</h3>
-        <form action="index.php?p=comentar" method="POST" class="comment-form">
-            <input type="hidden" name="csrf_token" value="token_csrf_aqui">
-            <input type="hidden" name="evento_id" value="1">
-            <div style="margin-bottom: 15px;">
-                <textarea name="comentario" rows="3" placeholder="Escreva algo sobre este evento..." class="comment-textarea" required></textarea>
+        <h3>Espaço da Comunidade</h3>
+        
+        <form class="comment-form" method="POST" action="">
+            <textarea class="comment-textarea" name="comentario" rows="4" placeholder="Escreva um comentário ou tire suas dúvidas sobre o evento..."></textarea>
+            <div class="comment-form-footer">
+                <button type="submit" class="comment-submit-btn">Publicar Comentário</button>
             </div>
-            <button type="submit" class="comment-submit-btn">Enviar Comentário</button>
         </form>
 
         <div class="comments-list">
             <div class="comment-card">
                 <div class="comment-header">
-                    <strong class="comment-author">Carlos Eduardo</strong>
-                    <span class="comment-date">25/05/2026 às 21:30</span>
+                    <span class="comment-author">Samuel</span>
+                    <span class="comment-date">26/05/2026</span>
                 </div>
-                <p class="comment-text">Mal posso esperar por essa noite, o line-up está incrível!</p>
+                <p class="comment-text">Esse line-up de DJs está simplesmente sensacional! Estarei lá com certeza.</p>
+                <div class="comment-actions">
+                    <a href="#" class="comment-edit">Editar</a>
+                    <a href="#" class="comment-delete">Excluir</a>
+                </div>
+            </div>
+
+            <div class="comment-card">
+                <div class="comment-header">
+                    <span class="comment-author">Pazuch</span>
+                    <span class="comment-date">25/05/2026</span>
+                </div>
+                <p class="comment-text">Alguém sabe se vai ter estacionamento conveniado perto do Espaço VIP?</p>
                 <div class="comment-actions">
                     <a href="#" class="comment-edit">Editar</a>
                     <a href="#" class="comment-delete">Excluir</a>

@@ -9,7 +9,6 @@
 <div class="nav-links">
     <a href="./?p=home">Home</a>
     <a href="./?p=eventos">Eventos</a>
-    <a href="./?p=gerenciar">Categorias</a>
     <a href="./?p=sobre">Sobre</a>
     <a href="./?p=contato">Contato</a>
 </div>
@@ -23,12 +22,13 @@
             <div id="userDropdown" class="user-dropdown-menu">
                 <a href="index.php?p=dashboard">Dashboard</a>
                 <a href="index.php?p=meusEventos">Meus Eventos</a>
+                <a href="index.php?p=gerenciar">Categorias</a>
                 <a href="index.php?p=logout" class="logout-link">Sair</a>
             </div>
         </div>
     <?php else: ?>
-        <a href="index.php?p=login" class="btn-login" style="text-decoration: none; display: inline-block;">Entrar</a>
-        <a href="index.php?p=login" class="btn-register" style="text-decoration: none; display: inline-block;">Cadastrar</a>
+        <a href="index.php?p=login&action=login" class="btn-login" style="text-decoration: none; display: inline-block;">Entrar</a>
+        <a href="index.php?p=login&action=cadastro" class="btn-register" style="text-decoration: none; display: inline-block;">Cadastrar</a>
     <?php endif; ?>
 </div>
 

@@ -2,6 +2,11 @@
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 use App\controller\authController;
 require_once('../controller/authController.php');
 require_once('../models/auth.php');
@@ -20,13 +25,27 @@ if (in_array($page, $paginas_privadas) && !isset($_SESSION['usuario_id'])) {
 switch($page){
     case 'cadastrar':
         $controller->criarUser();
-    break;
+        break;
     case 'logar':
         $controller->logar();
-    break;
+        break;
     case 'logout':
         $controller->logout();
-    break;
+        break;
+    case 'salvar_evento':
+        break;
+    case 'atualizar_evento':
+        break;
+    case 'deletar_evento':
+        break;
+    case 'salvar_categoria':
+        break;
+    case 'deletar_categoria':
+        break;
+    case 'enviar_contato':
+        break;
+    case 'recuperarSenha':
+        $controller->recuperarSenha();
 }
 
 ?><!DOCTYPE html>
@@ -56,8 +75,6 @@ switch($page){
             match($page){
                 "home" => require_once('../view/home.php'),
                 "login" => require_once('../view/login.php'),
-                "logar" => require_once('../view/home.php'),
-                "cadastrar" => require_once('../view/login.php'),
                 "dashboard" => require_once('../view/dashboard.php'),
                 "eventos" => require_once('../view/eventos.php'),
                 'contato' => require_once('../view/contato.php'),

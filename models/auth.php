@@ -31,4 +31,21 @@ class auth{
             return false;
         }
     }
+
+    public function resetarSenha($email, $cpf, $novaSenha){
+        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email AND cpf = :cpf";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':cpf',  $cpf);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':senha', $novaSenha);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 }
