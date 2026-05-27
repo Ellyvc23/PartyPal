@@ -1,3 +1,20 @@
+<?php
+session_start();
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../models/Participacao.php';
+
+$database = new Database();
+$db = $database->getConnection();
+
+$evento_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+$participacaoModel = new Participacao($db);
+$usuario_logado    = isset($_SESSION['usuario_id']);
+$ja_inscrito       = $usuario_logado
+    ? $participacaoModel->jaInscrito($_SESSION['usuario_id'], $evento_id)
+    : false;
+$total_confirmados = $participacaoModel->contarConfirmados($evento_id);
+?>
 <section class="event-details-section">
     <div class="event-details-flex">
         <div class="event-details-media">
@@ -36,28 +53,62 @@
             </div>
 
             <div class="presence-box">
-                <form class="presence-form" method="POST" action="">
-                    <select class="presence-select" name="status_presenca">
-                        <option value="confirmado">Confirmado</option>
-                        <option value="interessado">Interessado</option>
-                        <option value="ausente">Não vou</option>
-                    </select>
-                    <button type="submit" class="presence-btn">Marcar Presença</button>
-                </form>
-            </div>
+
+    <!-- Mensagens de feedback -->
+    <?php if (isset($_GET['sucesso'])): ?>
+        <div class="alert alert-success"><?= htmlspecialchars($_GET['sucesso']) ?></div>
+    <?php elseif (isset($_GET['erro'])): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($_GET['erro']) ?></div>
+    <?php endif; ?>
+
+    <!-- Contador -->
+    <p>👥 <strong><?= $total_confirmados ?></strong> confirmado(s)</p>
+
+    <!-- Botões -->
+    <?php if ($usuario_logado): ?>
+        <?php if ($ja_inscrito): ?>
+            <span class="badge badge-success">✅ Você está inscrito</span>
+            <form action="../controller/ParticipacaoController.php?action=cancelar" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                <input type="hidden" name="evento_id"  value="<?= $evento_id ?>">
+                <button type="submit" class="presence-btn"
+                        onclick="return confirm('Cancelar sua inscrição?')">
+                    ❌ Cancelar Inscrição
+                </button>
+            </form>
+        <?php else: ?>
+            <form action="../controller/ParticipacaoController.php?action=inscrever" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                <input type="hidden" name="evento_id"  value="<?= $evento_id ?>">
+                <button type="submit" class="presence-btn">
+                    🎉 Inscrever-se neste Evento
+                </button>
+            </form>
+        <?php endif; ?>
+    <?php else: ?>
+        <a href="login.php?msg=login_necessario" class="presence-btn">
+            🔑 Faça login para se inscrever
+        </a>
+    <?php endif; ?>
+
+</div>
         </div>
     </div>
 
     <div class="participants-box">
-        <h3>Confirmados no Rolê</h3>
-        <ul class="participants-list">
-            <li class="participant-item">Ellyson</li>
-            <li class="participant-item">Pekas</li>
-            <li class="participant-item">Pazuch</li>
-            <li class="participant-item">Samuel</li>
-            <li class="participant-item">Rezende</li>
-        </ul>
-    </div>
+    <h3>Confirmados no Rolê (<?= $total_confirmados ?>)</h3>
+    <ul class="participants-list">
+        <?php
+        $participantes = $participacaoModel->buscarPorEvento($evento_id);
+        foreach ($participantes as $p): ?>
+            <li class="participant-item"><?= htmlspecialchars($p['nome']) ?></li>
+        <?php endforeach; ?>
+
+        <?php if (empty($participantes)): ?>
+            <li class="participant-item">Nenhum confirmado ainda.</li>
+        <?php endif; ?>
+    </ul>
+</div>
 
     <div class="comments-container">
         <h3>Espaço da Comunidade</h3>
