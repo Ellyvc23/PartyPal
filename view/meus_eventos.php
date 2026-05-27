@@ -14,15 +14,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td style="font-weight: 600;">Show de Rock Ao Vivo</td>
-                    <td>31/05/2026</td>
-                    <td>Rio de Janeiro - RJ</td>
-                    <td class="table-actions">
-                        <a href="index.php?p=editar&id=1" class="action-edit">Editar</a>
-                        <a href="index.php?p=deletar_evento&id=1" onclick="return confirm('Deseja excluir este evento?')" class="action-delete">Excluir</a>
-                    </td>
-                </tr>
+                <?php if (empty($eventos)): ?>
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #bdbdbd;">Você ainda não criou nenhum evento.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($eventos as $evento): ?>
+                        <tr>
+                            <td style="font-weight: 600;"><?php echo htmlspecialchars($evento['titulo']); ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($evento['data_evento'])); ?></td>
+                            <td><?php echo htmlspecialchars($evento['localizacao']); ?></td>
+                            <td class="table-actions">
+                                <a href="index.php?p=editar&id=<?php echo $evento['id']; ?>" class="action-edit">Editar</a>
+                                <a href="index.php?p=deletar_evento&id=<?php echo $evento['id']; ?>" onclick="return confirm('Deseja excluir este evento?')" class="action-delete">Excluir</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

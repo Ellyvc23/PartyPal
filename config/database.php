@@ -3,7 +3,7 @@ namespace config;
 
 class Database{
     private $host = 'localhost';
-    private $dbname = 'partyPal';
+    private $dbname = 'partypal';
     private $usuario = 'root';
     private $senha = '';
 

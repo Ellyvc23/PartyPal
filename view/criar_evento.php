@@ -2,7 +2,7 @@
     <div class="form-box">
         <h2>Criar Novo Evento</h2>
         <form action="index.php?p=salvar_evento" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="csrf_token" value="token_csrf_aqui">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div class="form-group">
                 <label class="form-label">Título do Evento</label>
                 <input type="text" name="titulo" placeholder="Ex: Workshop de PHP MVC" class="form-input" required>

@@ -50,38 +50,24 @@
         </div>
 
         <div class="events-grid">
-            <div class="event-card">
-                <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop" alt="Evento">
-                <div class="event-content">
-                    <span class="event-date">24 MAI</span>
-                    <h3>Festa Eletrônica Sunset</h3>
-                    <p>📍 São Paulo - SP</p>
-                    <p>🕒 Sáb, 24 de Maio às 22:00</p>
-                    <button>Festa</button>
-                </div>
-            </div>
-
-            <div class="event-card">
-                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" alt="Evento">
-                <div class="event-content">
-                    <span class="event-date">31 MAI</span>
-                    <h3>Show de Rock Ao Vivo</h3>
-                    <p>📍 Rio de Janeiro - RJ</p>
-                    <p>🕒 Sex, 31 de Maio às 20:00</p>
-                    <button>Show</button>
-                </div>
-            </div>
-
-            <div class="event-card">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop" alt="Evento">
-                <div class="event-content">
-                    <span class="event-date">07 JUN</span>
-                    <h3>Workshop de Fotografia</h3>
-                    <p>📍 Belo Horizonte - MG</p>
-                    <p>🕒 Sex, 07 de Junho às 18:00</p>
-                    <button>Workshop</button>
-                </div>
-            </div>
+            <?php if (empty($eventos)): ?>
+                <p>Nenhum evento em destaque no momento.</p>
+            <?php else: ?>
+                <?php foreach ($eventos as $evento): ?>
+                    <div class="event-card">
+                        <img src="<?php echo htmlspecialchars($evento['imagem_url']); ?>" alt="Evento">
+                        <div class="event-content">
+                            <span class="event-date">
+                                <?php echo date('d M', strtotime($evento['data_evento'])); ?>
+                            </span>
+                            <h3><?php echo htmlspecialchars($evento['titulo']); ?></h3>
+                            <p>📍 <?php echo htmlspecialchars($evento['localizacao']); ?></p>
+                            <p>🕒 <?php echo date('D, d \d\e F \à\s H:i', strtotime($evento['data_evento'])); ?></p>
+                            <button><?php echo htmlspecialchars($evento['categoria_nome']); ?></button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </section>
