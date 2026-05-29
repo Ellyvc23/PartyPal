@@ -1,6 +1,11 @@
 <?php
+
+namespace App\Controller;
+
+use config\Database;
+use Participacao;
+
 require_once __DIR__ . '/../models/Participacao.php';
-require_once __DIR__ . '/../config/database.php';
 
 class ParticipacaoController {
     private $db;
@@ -8,7 +13,7 @@ class ParticipacaoController {
 
     public function __construct() {
         $database = new Database();
-        $this->db = $database->getConnection();
+        $this->db = $database->conectar();
         $this->participacao = new Participacao($this->db);
     }
 

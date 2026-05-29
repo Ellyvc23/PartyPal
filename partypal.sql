@@ -29,3 +29,19 @@ CREATE TABLE eventos (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
+
+INSERT INTO categorias (id, nome) VALUES
+                        (1, "Tecnologia"),
+                        (2, "Games"),
+                        (3, "Música"),
+                        (4, "Esportes");
+
+CREATE TABLE participacoes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT NOT NULL,
+    evento_id INT NOT NULL,
+    status VARCHAR(50) DEFAULT 'confirmado',
+    data_inscricao DATETIME NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (evento_id) REFERENCES eventos(id) ON DELETE CASCADE
+);

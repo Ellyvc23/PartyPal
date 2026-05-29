@@ -1,10 +1,9 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config/database.php';
+use config\Database;
 require_once __DIR__ . '/../models/Participacao.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->conectar();
 
 $evento_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -54,17 +53,14 @@ $total_confirmados = $participacaoModel->contarConfirmados($evento_id);
 
             <div class="presence-box">
 
-    <!-- Mensagens de feedback -->
     <?php if (isset($_GET['sucesso'])): ?>
         <div class="alert alert-success"><?= htmlspecialchars($_GET['sucesso']) ?></div>
     <?php elseif (isset($_GET['erro'])): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($_GET['erro']) ?></div>
     <?php endif; ?>
 
-    <!-- Contador -->
     <p>👥 <strong><?= $total_confirmados ?></strong> confirmado(s)</p>
 
-    <!-- Botões -->
     <?php if ($usuario_logado): ?>
         <?php if ($ja_inscrito): ?>
             <span class="badge badge-success">✅ Você está inscrito</span>
