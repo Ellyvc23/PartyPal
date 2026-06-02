@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
@@ -9,15 +12,20 @@ if (empty($_SESSION['csrf_token'])) {
 
 use App\Controller\authController;
 use App\Controller\EventoController;
+use App\Controller\CategoriaController;
 
 require_once('../controller/authController.php');
 require_once('../controller/EventoController.php');
+require_once('../controller/CategoriaController.php');
+require_once('../controller/DashboardController.php');
 require_once('../models/auth.php');
 require_once('../models/Evento.php');
+require_once('../models/Categoria.php');
 require_once('../config/database.php');
 
-$controller = new authController();
-$eventoController = new EventoController();
+$controller          = new authController();
+$eventoController    = new EventoController();
+$categoriaController = new CategoriaController();
 $page = $_GET['p'] ?? "home";
 
 $paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar'];
@@ -49,19 +57,31 @@ switch($page){
     case 'recuperarSenha':
         $controller->recuperarSenha();
         break;
+    case 'salvar_categoria':
+        $categoriaController->salvar();
+        break;
+    case 'deletar_categoria':
+        $categoriaController->deletar();
+        break;
 }
 
-$eventos = [];
-$evento  = null;
+$eventos    = [];
+$evento     = null;
+$categorias = [];
 
 if ($page === 'home') {
-    $eventos = $eventoController->carregarHome();
+    $eventos    = $eventoController->carregarHome();
+    $categorias = $categoriaController->listar();
 } elseif ($page === 'eventos') {
-    $eventos = $eventoController->carregarEventos();
+    $eventos    = $eventoController->carregarEventos();
+    $categorias = $categoriaController->listar();
 } elseif ($page === 'meusEventos') {
     $eventos = $eventoController->carregarMeusEventos();
 } elseif ($page === 'editar') {
-    $evento = $eventoController->carregarEditar($_GET['id'] ?? 0);
+    $evento     = $eventoController->carregarEditar($_GET['id'] ?? 0);
+    $categorias = $categoriaController->listar();
+} elseif ($page === 'criar') {
+    $categorias = $categoriaController->listar();
 }
 
 ?><!DOCTYPE html>

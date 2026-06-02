@@ -1,3 +1,6 @@
+/* =============================================
+   DASHBOARD
+   ============================================= */
 .dashboard-section {
     padding: 40px 8%;
     display: flex;
@@ -47,6 +50,9 @@
     flex: 2.5;
     min-width: 320px;
     padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .dashboard-card {
     background: #141414;
@@ -97,7 +103,35 @@
     text-decoration: none;
     font-size: 14px;
     border: 1px solid #3a3a3a;
+    transition: border-color 0.2s;
 }
+.participation-link:hover {
+    border-color: #e255ff;
+    color: #e255ff;
+}
+
+/* Alerts */
+.alert {
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.alert-success {
+    background: #00d4aa22;
+    border: 1px solid #00d4aa66;
+    color: #00d4aa;
+}
+.alert-error {
+    background: #ff4f4f22;
+    border: 1px solid #ff4f4f66;
+    color: #ff4f4f;
+}
+
+/* =============================================
+   GERENCIAR CATEGORIAS
+   ============================================= */
 .categorias-section {
     padding: 40px 8%;
 }
@@ -128,6 +162,9 @@
     outline: none;
     font-family: 'Poppins', sans-serif;
 }
+.category-input:focus {
+    border-color: #e255ff;
+}
 .category-submit-btn {
     background: #00f0ff;
     color: black;
@@ -137,4 +174,57 @@
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    transition: opacity 0.2s;
+}
+.category-submit-btn:hover {
+    opacity: 0.85;
+}
+.table-container {
+    background: #141414;
+    border-radius: 24px;
+    border: 1px solid #242424;
+    overflow: hidden;
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-table thead {
+    background: #191919;
+}
+.data-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    border-bottom: 1px solid #242424;
+}
+.data-table td {
+    padding: 16px 20px;
+    font-size: 15px;
+    color: #ddd;
+    border-bottom: 1px solid #1e1e1e;
+}
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.data-table tbody tr:hover td {
+    background: #191919;
+}
+.action-delete {
+    background: #ff4f4f22;
+    color: #ff4f4f;
+    border: 1px solid #ff4f4f44;
+    padding: 6px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.action-delete:hover {
+    background: #ff4f4f44;
 }

@@ -11,10 +11,12 @@
                 <div class="form-col">
                     <label class="form-label">Categoria</label>
                     <select name="categoria_id" class="form-input" style="height: 50px;" required>
-                        <option value="1">Tecnologia</option>
-                        <option value="2">Games</option>
-                        <option value="3">Música</option>
-                        <option value="4">Esportes</option>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?php echo $cat['id']; ?>">
+                                <?php echo htmlspecialchars($cat['nome']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-col">
