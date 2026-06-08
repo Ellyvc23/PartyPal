@@ -15,10 +15,11 @@
                 <div class="form-col">
                     <label class="form-label">Categoria</label>
                     <select name="categoria_id" class="form-input" style="height: 50px;" required>
-                        <option value="1" <?php echo $evento['categoria_id'] == 1 ? 'selected' : ''; ?>>Festas & Shows</option>
-                        <option value="2" <?php echo $evento['categoria_id'] == 2 ? 'selected' : ''; ?>>Geek & Cultura Pop</option>
-                        <option value="3" <?php echo $evento['categoria_id'] == 3 ? 'selected' : ''; ?>>Esportes</option>
-                        <option value="4" <?php echo $evento['categoria_id'] == 4 ? 'selected' : ''; ?>>Acadêmico</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?php echo $cat['id']; ?>" <?php echo $evento['categoria_id'] == $cat['id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($cat['nome']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-col">

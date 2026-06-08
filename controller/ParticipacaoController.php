@@ -5,6 +5,8 @@ namespace App\Controller;
 use config\Database;
 use Participacao;
 
+// ADICIONADO: Importação do arquivo de configuração do banco de dados
+require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Participacao.php';
 
 class ParticipacaoController {
@@ -20,7 +22,7 @@ class ParticipacaoController {
     public function inscrever() {
         session_start();
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: ../view/login.php?msg=login_necessario');
+            header('Location: ../public/index.php?p=login&msg=login_necessario');
             exit;
         }
 
@@ -30,21 +32,21 @@ class ParticipacaoController {
         $usuario_id = $_SESSION['usuario_id'];
 
         if (!$evento_id) {
-            header('Location: ../view/eventos.php?erro=evento_invalido');
+            header('Location: ../public/index.php?p=eventos&erro=evento_invalido');
             exit;
         }
 
         $resultado = $this->participacao->inscrever($usuario_id, $evento_id);
 
         $tipo = $resultado['success'] ? 'sucesso' : 'erro';
-        header("Location: ../view/detalhes_evento.php?id={$evento_id}&{$tipo}=" . urlencode($resultado['msg']));
+        header("Location: ../public/index.php?p=detalhes&id={$evento_id}&{$tipo}=" . urlencode($resultado['msg']));
         exit;
     }
 
     public function cancelar() {
         session_start();
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: ../view/login.php');
+            header('Location: ../public/index.php?p=login');
             exit;
         }
 
@@ -56,14 +58,14 @@ class ParticipacaoController {
         $resultado = $this->participacao->cancelar($usuario_id, $evento_id);
 
         $tipo = $resultado['success'] ? 'sucesso' : 'erro';
-        header("Location: ../view/detalhes_evento.php?id={$evento_id}&{$tipo}=" . urlencode($resultado['msg']));
+        header("Location: ../public/index.php?p=detalhes&id={$evento_id}&{$tipo}=" . urlencode($resultado['msg']));
         exit;
     }
 
     public function minhasParticipacoes() {
         session_start();
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: ../view/login.php');
+            header('Location: ../public/index.php?p=login');
             exit;
         }
 
@@ -74,13 +76,13 @@ class ParticipacaoController {
     public function participantesEvento() {
         session_start();
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: ../view/login.php');
+            header('Location: ../public/index.php?p=login');
             exit;
         }
 
         $evento_id = filter_input(INPUT_GET, 'evento_id', FILTER_VALIDATE_INT);
         if (!$evento_id) {
-            header('Location: ../view/eventos.php');
+            header('Location: ../public/index.php?p=eventos');
             exit;
         }
 
@@ -91,7 +93,7 @@ class ParticipacaoController {
     public function atualizarStatus() {
         session_start();
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: ../view/login.php');
+            header('Location: ../public/index.php?p=login');
             exit;
         }
 
@@ -116,7 +118,6 @@ class ParticipacaoController {
     }
 }
 
-// Roteamento
 $controller = new ParticipacaoController();
 $action = $_GET['action'] ?? '';
 
@@ -126,5 +127,5 @@ match($action) {
     'minhas'           => $controller->minhasParticipacoes(),
     'participantes'    => $controller->participantesEvento(),
     'atualizar_status' => $controller->atualizarStatus(),
-    default            => header('Location: ../view/eventos.php')
+    default            => header('Location: ../public/index.php?p=eventos')
 };

@@ -55,15 +55,23 @@
             <?php else: ?>
                 <?php foreach ($eventos as $evento): ?>
                     <div class="event-card">
-                        <img src="<?php echo htmlspecialchars($evento['imagem_url']); ?>" alt="Evento">
+                        <?php $imagem = !empty($evento['imagem_url']) ? htmlspecialchars($evento['imagem_url']) : 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=800&auto=format&fit=crop'; ?>
+                        <div class="event-image" style="background-image: url('<?php echo $imagem; ?>');"></div>
+                        
                         <div class="event-content">
                             <span class="event-date">
                                 <?php echo date('d M', strtotime($evento['data_evento'])); ?>
                             </span>
                             <h3><?php echo htmlspecialchars($evento['titulo']); ?></h3>
-                            <p>📍 <?php echo htmlspecialchars($evento['localizacao']); ?></p>
-                            <p>🕒 <?php echo date('D, d \d\e F \à\s H:i', strtotime($evento['data_evento'])); ?></p>
-                            <button><?php echo htmlspecialchars($evento['categoria_nome']); ?></button>
+                            <div class="event-details-text">
+                                <p>📍 <?php echo htmlspecialchars($evento['localizacao']); ?></p>
+                                <p>🕒 <?php echo date('d/m/Y \à\s H:i', strtotime($evento['data_evento'])); ?></p>
+                            </div>
+                            
+                            <div class="event-footer">
+                                <span class="category-tag"><?php echo htmlspecialchars($evento['categoria_nome']); ?></span>
+                                <a href="index.php?p=detalhes&id=<?php echo $evento['id']; ?>" class="btn-details">Ver Detalhes</a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -97,7 +97,6 @@ class Evento {
         $sql = "SELECT eventos.*, categorias.nome AS categoria_nome 
                 FROM eventos 
                 JOIN categorias ON eventos.categoria_id = categorias.id
-                WHERE eventos.destaque = 1
                 ORDER BY eventos.data_evento ASC
                 LIMIT 3";
         $stmt = $this->db->prepare($sql);

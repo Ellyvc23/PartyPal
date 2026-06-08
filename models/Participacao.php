@@ -46,7 +46,7 @@ class Participacao {
     }
 
     public function buscarPorUsuario($usuario_id) {
-        $sql = "SELECT p.*, e.titulo, e.data_evento, e.local, e.descricao, e.imagem
+        $sql = "SELECT p.*, e.titulo, e.data_evento, e.localizacao AS local, e.descricao, e.imagem_url AS imagem
                 FROM participacoes p
                 JOIN eventos e ON p.evento_id = e.id
                 WHERE p.usuario_id = :usuario_id

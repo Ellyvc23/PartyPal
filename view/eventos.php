@@ -14,10 +14,11 @@
             <div class="select-wrapper">
                 <select name="categoria">
                     <option value="">Todas as Categorias</option>
-                    <option value="1">Festas & Shows</option>
-                    <option value="2">Geek & Cultura Pop</option>
-                    <option value="3">Esportes</option>
-                    <option value="4">Acadêmico</option>
+                    <?php foreach ($categorias as $cat): ?>
+                        <option value="<?php echo $cat['id']; ?>" <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == $cat['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($cat['nome']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             

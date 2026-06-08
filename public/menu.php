@@ -44,11 +44,6 @@
                     <span class="mpi-label">Total de Participantes</span>
                     <span class="mpi-value"><?php echo $_menuMetrics['total_participantes']; ?></span>
                 </div>
-                <div class="metrics-popup-item">
-                    <span class="mpi-icon">💬</span>
-                    <span class="mpi-label">Comentários Recebidos</span>
-                    <span class="mpi-value"><?php echo $_menuMetrics['total_comentarios']; ?></span>
-                </div>
                 <a href="index.php?p=dashboard" class="metrics-popup-link">Ver Dashboard completo →</a>
             </div>
         </div>
@@ -62,6 +57,7 @@
                 <a href="index.php?p=dashboard">Dashboard</a>
                 <a href="index.php?p=meusEventos">Meus Eventos</a>
                 <a href="index.php?p=gerenciar">Categorias</a>
+                <a href="index.php?p=participacoes">Participações</a>
                 <a href="index.php?p=logout" class="logout-link">Sair</a>
             </div>
         </div>

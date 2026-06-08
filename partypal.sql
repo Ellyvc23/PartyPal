@@ -31,10 +31,10 @@ CREATE TABLE eventos (
 );
 
 INSERT INTO categorias (id, nome) VALUES
-                        (1, "Tecnologia"),
-                        (2, "Games"),
-                        (3, "Música"),
-                        (4, "Esportes");
+                        (1, "Festas & Shows"),
+                        (2, "Geek & Cultura Pop"),
+                        (3, "Esportes"),
+                        (4, "Acadêmico");
 
 CREATE TABLE participacoes (
     id INT PRIMARY KEY AUTO_INCREMENT,

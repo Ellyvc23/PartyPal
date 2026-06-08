@@ -27,10 +27,6 @@ $minhasParticipacoes = $dashController->getMinhasParticipacoes((int)$_SESSION['u
                 <span>Total de Participantes</span>
                 <h4><?php echo $metricas['total_participantes']; ?></h4>
             </div>
-            <div class="metric-card m4">
-                <span>Comentários Recebidos</span>
-                <h4><?php echo $metricas['total_comentarios']; ?></h4>
-            </div>
         </div>
     </aside>
 

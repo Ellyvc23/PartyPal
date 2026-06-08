@@ -1,12 +1,9 @@
 <?php
-/*
- * PROJETO FINAL PHP - TEMA PARTYPAL
- *  * Equipe:
- * - Ellyson Vaz Correia (RGM: 43430945)
- * - Matheus Pazuch (RGM: )
- * - [NOME DO COLEGA 3] (RGM: [INSERIR RGM])
- */
-
+#Ellyson Vaz Correia - RGM: 43430945
+#Mateus Ferreira Pazuch - RGM: 43768652
+#Lucas Resende - RGM: 42285348
+#Pedro Henrique Fernandes - RGM: 41950968
+#Samuel Báez Quijada - RGM: 43893457
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -36,7 +33,7 @@ $eventoController    = new EventoController();
 $categoriaController = new CategoriaController();
 $page = $_GET['p'] ?? "home";
 
-$paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar', 'editar_categoria'];
+$paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar', 'editar_categoria', 'participacoes'];
 
 if (in_array($page, $paginas_privadas) && !isset($_SESSION['usuario_id'])) {
     header("Location: index.php?p=login");
@@ -79,6 +76,7 @@ switch($page){
 $eventos    = [];
 $evento     = null;
 $categorias = [];
+$participacoes = [];
 
 if ($page === 'home') {
     $eventos    = $eventoController->carregarHome();
@@ -95,6 +93,12 @@ if ($page === 'home') {
     $categorias = $categoriaController->listar();
 } elseif ($page === 'editar_categoria') {
     $categoria_editar = $categoriaController->carregarEditar((int)($_GET['id'] ?? 0));
+} elseif ($page === 'participacoes') {
+    require_once('../models/Participacao.php');
+    $pDatabase = new config\Database();
+    $pDb = $pDatabase->conectar();
+    $pModel = new Participacao($pDb);
+    $participacoes = $pModel->buscarPorUsuario($_SESSION['usuario_id']);
 }
 
 ?><!DOCTYPE html>
@@ -109,6 +113,7 @@ if ($page === 'home') {
     <link rel="stylesheet" href="../public/css/eventos.css">
     <link rel="stylesheet" href="../public/css/gerenciar_eventos.css">
     <link rel="stylesheet" href="../public/css/institucional.css">
+    <link rel="stylesheet" href="../public/css/participacoes.css">
     <title>PartyPal</title>
 </head>
 <body>
@@ -134,6 +139,7 @@ if ($page === 'home') {
                 'detalhes'         => require_once('../view/detalhes_evento.php'),
                 'criar'            => require_once('../view/criar_evento.php'),
                 'editar_categoria' => require_once('../view/editar_categoria.php'),
+                'participacoes'    => require_once('../view/minhas_participacoes.php'),
                 default            => require_once('../view/error404.php')
             };
         ?>
