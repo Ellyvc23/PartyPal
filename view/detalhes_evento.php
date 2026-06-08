@@ -105,41 +105,4 @@ $total_confirmados = $participacaoModel->contarConfirmados($evento_id);
         <?php endif; ?>
     </ul>
 </div>
-
-    <div class="comments-container">
-        <h3>Espaço da Comunidade</h3>
-        
-        <form class="comment-form" method="POST" action="">
-            <textarea class="comment-textarea" name="comentario" rows="4" placeholder="Escreva um comentário ou tire suas dúvidas sobre o evento..."></textarea>
-            <div class="comment-form-footer">
-                <button type="submit" class="comment-submit-btn">Publicar Comentário</button>
-            </div>
-        </form>
-
-        <div class="comments-list">
-            <div class="comment-card">
-                <div class="comment-header">
-                    <span class="comment-author">Samuel</span>
-                    <span class="comment-date">26/05/2026</span>
-                </div>
-                <p class="comment-text">Esse line-up de DJs está simplesmente sensacional! Estarei lá com certeza.</p>
-                <div class="comment-actions">
-                    <a href="#" class="comment-edit">Editar</a>
-                    <a href="#" class="comment-delete">Excluir</a>
-                </div>
-            </div>
-
-            <div class="comment-card">
-                <div class="comment-header">
-                    <span class="comment-author">Pazuch</span>
-                    <span class="comment-date">25/05/2026</span>
-                </div>
-                <p class="comment-text">Alguém sabe se vai ter estacionamento conveniado perto do Espaço VIP?</p>
-                <div class="comment-actions">
-                    <a href="#" class="comment-edit">Editar</a>
-                    <a href="#" class="comment-delete">Excluir</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>

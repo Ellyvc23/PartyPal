@@ -48,9 +48,10 @@ $categorias    = $catController->listar();
                             <td><?php echo $cat['id']; ?></td>
                             <td><?php echo htmlspecialchars($cat['nome']); ?></td>
                             <td style="text-align: center;">
+                                <a href="index.php?p=editar_categoria&id=<?php echo $cat['id']; ?>" class="action-edit" style="color: #00f0ff; text-decoration: none; font-size: 13px; font-weight: 600; margin-right: 15px; border: 1px solid #00f0ff44; padding: 6px 16px; border-radius: 8px; background: #00f0ff11;">Editar</a>
                                 <a href="index.php?p=deletar_categoria&id=<?php echo $cat['id']; ?>"
-                                   onclick="return confirm('Deseja excluir esta categoria? Categorias com eventos não podem ser removidas.')"
-                                   class="action-delete">Excluir</a>
+                                onclick="return confirm('Deseja excluir esta categoria? Categorias com eventos não podem ser removidas.')"
+                                class="action-delete">Excluir</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

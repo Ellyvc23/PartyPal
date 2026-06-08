@@ -95,6 +95,11 @@
                     <label for="cpf_recuperar">CPF</label>
                     <input type="text" id="cpf_recuperar" name="cpf" placeholder="000.000.000-00" required>
                 </div>
+                
+                <div class="form-group">
+                    <label for="data_nascimento_recuperar">Data de Nascimento</label>
+                    <input type="date" id="data_nascimento_recuperar" name="data_nascimento" class="input-date" required>
+                </div>
 
                 <div class="form-group">
                     <label for="nova_senha">Nova Senha</label>

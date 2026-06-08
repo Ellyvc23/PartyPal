@@ -1,4 +1,12 @@
 <?php
+/*
+ * PROJETO FINAL PHP - TEMA PARTYPAL
+ *  * Equipe:
+ * - Ellyson Vaz Correia (RGM: 43430945)
+ * - Matheus Pazuch (RGM: )
+ * - [NOME DO COLEGA 3] (RGM: [INSERIR RGM])
+ */
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -28,7 +36,7 @@ $eventoController    = new EventoController();
 $categoriaController = new CategoriaController();
 $page = $_GET['p'] ?? "home";
 
-$paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar'];
+$paginas_privadas = ['dashboard', 'meusEventos', 'gerenciar', 'editar', 'criar', 'editar_categoria'];
 
 if (in_array($page, $paginas_privadas) && !isset($_SESSION['usuario_id'])) {
     header("Location: index.php?p=login");
@@ -60,6 +68,9 @@ switch($page){
     case 'salvar_categoria':
         $categoriaController->salvar();
         break;
+    case 'atualizar_categoria':
+        $categoriaController->atualizar();
+        break;
     case 'deletar_categoria':
         $categoriaController->deletar();
         break;
@@ -82,6 +93,8 @@ if ($page === 'home') {
     $categorias = $categoriaController->listar();
 } elseif ($page === 'criar') {
     $categorias = $categoriaController->listar();
+} elseif ($page === 'editar_categoria') {
+    $categoria_editar = $categoriaController->carregarEditar((int)($_GET['id'] ?? 0));
 }
 
 ?><!DOCTYPE html>
@@ -109,18 +122,19 @@ if ($page === 'home') {
     <main class="<?php echo $page === 'login' ? 'auth-main' : ''; ?>">
         <?php
             match($page){
-                "home"        => require_once('../view/home.php'),
-                "login"       => require_once('../view/login.php'),
-                "dashboard"   => require_once('../view/dashboard.php'),
-                "eventos"     => require_once('../view/eventos.php'),
-                'contato'     => require_once('../view/contato.php'),
-                'sobre'       => require_once('../view/sobre.php'),
-                'meusEventos' => require_once('../view/meus_eventos.php'),
-                'gerenciar'   => require_once('../view/gerenciar_categorias.php'),
-                'editar'      => require_once('../view/editar_evento.php'),
-                'detalhes'    => require_once('../view/detalhes_evento.php'),
-                'criar'       => require_once('../view/criar_evento.php'),
-                default       => require_once('../view/error404.php')
+                "home"             => require_once('../view/home.php'),
+                "login"            => require_once('../view/login.php'),
+                "dashboard"        => require_once('../view/dashboard.php'),
+                "eventos"          => require_once('../view/eventos.php'),
+                'contato'          => require_once('../view/contato.php'),
+                'sobre'            => require_once('../view/sobre.php'),
+                'meusEventos'      => require_once('../view/meus_eventos.php'),
+                'gerenciar'        => require_once('../view/gerenciar_categorias.php'),
+                'editar'           => require_once('../view/editar_evento.php'),
+                'detalhes'         => require_once('../view/detalhes_evento.php'),
+                'criar'            => require_once('../view/criar_evento.php'),
+                'editar_categoria' => require_once('../view/editar_categoria.php'),
+                default            => require_once('../view/error404.php')
             };
         ?>
     </main>

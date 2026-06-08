@@ -3,7 +3,7 @@
         <h2>Fale Conosco</h2>
         <p class="contact-sub">Dúvidas, críticas ou sugestões? Envie uma mensagem para a nossa equipe.</p>
         
-        <form action="index.php?p=enviar_contato" method="POST">
+        <form onsubmit="alert('Mensagem enviada com sucesso! A nossa equipa entrará em contacto em breve.'); return false;">
             <div class="form-group">
                 <label class="form-label">Seu Nome</label>
                 <input type="text" name="nome" placeholder="Nome Completo" class="form-input" required>

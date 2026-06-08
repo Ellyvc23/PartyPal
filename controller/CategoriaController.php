@@ -21,6 +21,10 @@ class CategoriaController {
         return $this->model->listarTodas();
     }
 
+    public function carregarEditar(int $id): array|false {
+        return $this->model->buscarPorId($id);
+    }
+
     public function salvar(): void {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: index.php?p=gerenciar");
@@ -45,6 +49,32 @@ class CategoriaController {
             $_SESSION['sucesso'] = "Categoria \"{$nome}\" criada com sucesso!";
         } else {
             $_SESSION['erro'] = "Erro ao criar categoria.";
+        }
+
+        header("Location: index.php?p=gerenciar");
+        exit;
+    }
+
+    public function atualizar(): void {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            $_SESSION['erro'] = "Requisição inválida.";
+            header("Location: index.php?p=gerenciar");
+            exit;
+        }
+
+        $id = (int)($_POST['id'] ?? 0);
+        $nome = trim($_POST['nome_categoria'] ?? '');
+
+        if (empty($nome)) {
+            $_SESSION['erro'] = "O nome da categoria não pode ser vazio.";
+            header("Location: index.php?p=gerenciar");
+            exit;
+        }
+
+        if ($this->model->atualizar($id, $nome)) {
+            $_SESSION['sucesso'] = "Categoria atualizada com sucesso!";
+        } else {
+            $_SESSION['erro'] = "Erro ao atualizar categoria.";
         }
 
         header("Location: index.php?p=gerenciar");

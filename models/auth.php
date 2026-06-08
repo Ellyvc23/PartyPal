@@ -11,10 +11,27 @@ class auth{
     }
 
     public function criarUsuário($name ,$email, $cpf, $dataNasc, $senha){
-        $sql = "INSERT INTO usuarios (nome, email, cpf, data_nascimento, senha) VALUES (:nome, :email, :cpf, :dataNasc, :senha)";
+        $sql = "SELECT * FROM usuarios WHERE email = :email OR cpf = :cpf";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':nome' => $name, ':email' => $email, ':cpf' => $cpf, ':dataNasc' => $dataNasc, ':senha' => $senha]);
-        return true;
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':cpf', $cpf);
+        $stmt->execute();
+        
+        if($stmt->fetch()){
+            return false;
+        }
+        else{
+            $sql = "INSERT INTO usuarios (nome, email, cpf, data_nascimento, senha) VALUES (:nome, :email, :cpf, :dataNasc, :senha)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':nome' => $name,
+                ':email' => $email,
+                ':cpf' => $cpf,
+                ':dataNasc' => $dataNasc,
+                ':senha' => $senha
+                ]);
+            return true;
+        }
     }
 
     public function logar($email, $senha){
@@ -32,11 +49,12 @@ class auth{
         }
     }
 
-    public function resetarSenha($email, $cpf, $novaSenha){
-        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email AND cpf = :cpf";
+    public function resetarSenha($email, $cpf, $dataNasc, $novaSenha){
+        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email AND cpf = :cpf AND data_nascimento = :dataNasc";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':cpf',  $cpf);
         $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':dataNasc', $dataNasc);
         $stmt->bindValue(':senha', $novaSenha);
         $stmt->execute();
 
@@ -46,6 +64,5 @@ class auth{
         else{
             return false;
         }
-
     }
 }

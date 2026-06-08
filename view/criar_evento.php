@@ -1,7 +1,8 @@
+
 <section class="form-container-section">
     <div class="form-box">
         <h2>Criar Novo Evento</h2>
-        <form action="index.php?p=salvar_evento" method="POST" enctype="multipart/form-data">
+        <form action="index.php?p=salvar_evento" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div class="form-group">
                 <label class="form-label">Título do Evento</label>

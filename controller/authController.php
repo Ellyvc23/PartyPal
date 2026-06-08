@@ -100,6 +100,7 @@ class authController{
 
         $email = $_POST['email'];
         $cpf = $_POST['cpf'];
+        $dataNasc = $_POST['data_nascimento'];
         $novaSenha = $_POST['nova_senha'];
         $passConfirm = $_POST['nova_senha_confirma'];
 
@@ -115,7 +116,7 @@ class authController{
 
         $modelRecuperar = new auth($conexao);
 
-        if($modelRecuperar->resetarSenha($email, $cpf, $senhaHash)) {
+        if($modelRecuperar->resetarSenha($email, $cpf, $dataNasc, $senhaHash)) {
                 if(session_status() === PHP_SESSION_NONE){ session_start(); }
             $_SESSION['alerta_sucesso'] = 'Senha redefinida com sucesso! Faça login com sua nova senha.';
             header("Location: index.php?p=login");
@@ -123,7 +124,7 @@ class authController{
         } 
         else {
             echo "<script> 
-                    alert('Dados incorretos! Verifique se o E-mail e o CPF digitados estão corretos.'); 
+                    alert('Dados incorretos! Verifique se os dados digitados estão corretos.'); 
                     window.history.back(); 
                     </script>";
             exit;
